@@ -23,7 +23,7 @@
   _/
   module.exports = {
   content: [
-  "./src/\*\*/_.{js,jsx,ts,tsx}",
+  "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
   extend: {},

@@ -32,7 +32,7 @@ const Header = () => {
           {/* 로고 및 홈페이지 링크 */}
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
-              대학마켓
+            <img src="/images/univ-market-logo.svg" alt="대학마켓" className="h-20" />
             </Link>
           </div>
 
@@ -48,7 +48,7 @@ const Header = () => {
               />
               <button
                 type="submit"
-                className="bg-indigo-800 px-4 py-2 rounded-r-md hover:bg-indigo-900"
+                className="bg-indigo-800 px-4 py-1.5 rounded-r-md hover:bg-indigo-900"
               >
                 검색
               </button>

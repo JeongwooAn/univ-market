@@ -59,7 +59,7 @@ const Home = () => {
             </div>
           </div>
           <div className="md:w-1/2">
-            <img src="/images/hero-image.png" alt="대학마켓" className="rounded-lg shadow-lg" />
+            <img src="/images/univ-market-hero.svg" alt="대학마켓" className="rounded-lg shadow-lg" />
           </div>
         </div>
       </div>
