@@ -69,13 +69,23 @@
 
 #### 프로젝트 클론
 
-bashgit clone https://github.com/
-cd
+```
+git clone https://github.com/JeongwooAn/univ-market.git
+```
+
+```
+cd univ-market
+```
 
 #### 프로젝트 빌드
 
+```
 ./gradlew build
+```
+
+```
 ./gradlew build -x test
+```
 
 #### API 문서
 
@@ -87,6 +97,7 @@ cd
 
 ### 프로젝트 구조
 
+```
 com.univ.market
 ├── config // 설정 관련 클래스
 │ ├── SecurityConfig.java
@@ -139,6 +150,7 @@ com.univ.market
 │ ├── CustomException.java
 │ └── ErrorResponse.java
 └── UnivMarketApplication.java // 메인 애플리케이션
+```
 
 ---
 
