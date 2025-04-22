@@ -2,6 +2,19 @@
 
 ## 대학생들을 위한 안전한 중고거래 플랫폼 '대학마켓' 프로젝트입니다.
 
+
+---
+
+### git clone
+
+```
+git clone https://github.com/JeongwooAn/univ-market.git
+```
+
+```
+cd univ-market
+```
+
 ---
 
 ### 기술 스택
@@ -59,17 +72,5 @@
 #### 알림 기능
 
 1. 상품 등록, 예약, 거래 완료 시 이메일 알림
-
----
-
-### git clone
-
-```
-git clone https://github.com/JeongwooAn/univ-market.git
-```
-
-```
-cd univ-market
-```
 
 ---
