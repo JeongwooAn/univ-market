@@ -1,44 +1,76 @@
-# 대학마켓 프론트엔드
+/\*\*
 
-## 대학생들을 위한 안전한 중고거래 플랫폼 '대학마켓'의 프론트엔드 프로젝트입니다.
+- 대학마켓 프론트엔드 프로젝트 설정 가이드
+-
+- 이 파일은 프로젝트를 처음 설정할 때 필요한 단계들을 설명합니다.
+  \*/
 
----
+// 1. 프로젝트 생성
+// Create React App을 사용하여 새 프로젝트 생성
+// npx create-react-app univ-market-frontend
 
-### 기술 스택
+// 2. 필요한 패키지 설치
+// npm install react-router-dom axios sockjs-client stompjs
 
-##### React.js
+// 3. Tailwind CSS 설정
+// npm install -D tailwindcss postcss autoprefixer
+// npx tailwindcss init -p
 
-##### TailWind CSS
+// 4. tailwind.config.js 파일 설정
+/\*\*
 
----
+- @type {import('tailwindcss').Config}
+  _/
+  module.exports = {
+  content: [
+  "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+  extend: {},
+  },
+  plugins: [],
+  }
 
-### 시작하기
+// 5. index.css 파일에 Tailwind 지시어 추가
+/\*\*
 
-#### 사전 요구사항
+- src/index.css
+  \*/
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-Node.js v18.20.8(LTS)
+// 6. 환경 변수 설정 (.env 파일)
+/\*\*
 
-#### 프로젝트 설치
+- .env 파일 작성
+  \*/
+  REACT_APP_API_URL=http://localhost:8080/api
 
-```
-npm install
-```
+// 7. 폴더 구조 생성
+/\*\*
 
-#### 프로젝트 실행
+- src/
+- ├── components/
+- │ ├── layout/
+- │ ├── product/
+- │ ├── user/
+- │ ├── chat/
+- │ └── common/
+- ├── pages/
+- ├── services/
+- ├── utils/
+- ├── hooks/
+- ├── context/
+- ├── App.js
+- └── index.js
+  \*/
 
-```
-npm start
-```
+// 8. 프로젝트 실행
+// npm start
 
-### 초기 세팅(아직 미적용)
-
-환경 변수 설정 (.env 파일)
-
-.env 파일 작성
-
-REACT_APP_API_URL=http://localhost:8080/api
-
-URL 라우팅
+// 9. URL 라우팅
+/\*\*
 
 - 프로젝트의 주요 URL 경로:
 - - '/': 홈페이지
@@ -52,3 +84,4 @@ URL 라우팅
 - - '/chat?roomId=:roomId': 채팅 페이지 (로그인 필요)
 - - '/my-page': 사용자 프로필 페이지 (로그인 필요)
 - - '/verify-university': 대학교 인증 페이지 (로그인 필요)
+    \*/

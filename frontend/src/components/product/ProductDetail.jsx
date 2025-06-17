@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { formatPrice, formatDate } from "../../utils/format";
-import { useAuth } from "../../hooks/useAuth";
-import { reserveProduct, completeTransaction } from "../../services/productApi";
-import { createChatRoom } from "../../services/chatApi";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { formatPrice, formatDate } from '../../utils/format';
+import { useAuth } from '../../hooks/useAuth';
+import { reserveProduct, completeTransaction } from '../../services/productApi';
+import { createChatRoom } from '../../services/chatApi';
+
 /**
  * 상품 상세 정보를 표시하는 컴포넌트
  * 상품 이미지, 설명, 가격, 판매자 정보 및 거래 관련 버튼을 제공합니다.
@@ -56,7 +57,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
   const handleChat = async () => {
     // 로그인 상태 확인
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
@@ -66,8 +67,8 @@ const ProductDetail = ({ product, isLoading, error }) => {
       // 생성된 채팅방으로 이동
       navigate(`/chat?roomId=${chatRoom.id}`);
     } catch (error) {
-      console.error("채팅방 생성 중 오류 발생:", error);
-      alert("채팅방을 생성할 수 없습니다. 다시 시도해주세요.");
+      console.error('채팅방 생성 중 오류 발생:', error);
+      alert('채팅방을 생성할 수 없습니다. 다시 시도해주세요.');
     }
   };
 
@@ -77,12 +78,12 @@ const ProductDetail = ({ product, isLoading, error }) => {
   const handleReserve = async () => {
     // 로그인 상태 확인
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
     // 사용자 확인
-    if (!window.confirm("이 상품을 예약하시겠습니까?")) {
+    if (!window.confirm('이 상품을 예약하시겠습니까?')) {
       return;
     }
 
@@ -93,8 +94,8 @@ const ProductDetail = ({ product, isLoading, error }) => {
       // 페이지 새로고침으로 상태 업데이트
       window.location.reload();
     } catch (error) {
-      console.error("상품 예약 중 오류 발생:", error);
-      alert("상품을 예약할 수 없습니다. 다시 시도해주세요.");
+      console.error('상품 예약 중 오류 발생:', error);
+      alert('상품을 예약할 수 없습니다. 다시 시도해주세요.');
     } finally {
       setIsReserving(false);
     }
@@ -106,12 +107,12 @@ const ProductDetail = ({ product, isLoading, error }) => {
   const handleComplete = async () => {
     // 로그인 상태 확인
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate('/login');
       return;
     }
 
     // 사용자 확인
-    if (!window.confirm("거래를 완료하시겠습니까?")) {
+    if (!window.confirm('거래를 완료하시겠습니까?')) {
       return;
     }
 
@@ -122,8 +123,8 @@ const ProductDetail = ({ product, isLoading, error }) => {
       // 페이지 새로고침으로 상태 업데이트
       window.location.reload();
     } catch (error) {
-      console.error("거래 완료 중 오류 발생:", error);
-      alert("거래를 완료할 수 없습니다. 다시 시도해주세요.");
+      console.error('거래 완료 중 오류 발생:', error);
+      alert('거래를 완료할 수 없습니다. 다시 시도해주세요.');
     } finally {
       setIsCompleting(false);
     }
@@ -133,8 +134,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
   const isSeller = user && user.id === product.sellerId;
 
   // 구매자 본인 여부 확인 (예약된 경우)
-  const isBuyer =
-    user && product.status === "RESERVED" && user.id === product.buyerId;
+  const isBuyer = user && product.status === 'RESERVED' && user.id === product.buyerId;
 
   /**
    * 상품 상태에 따른 액션 버튼을 렌더링하는 함수
@@ -142,26 +142,24 @@ const ProductDetail = ({ product, isLoading, error }) => {
    */
   const renderActionButtons = () => {
     // 판매 완료된 상품인 경우
-    if (product.status === "COMPLETED") {
+    if (product.status === 'COMPLETED') {
       return (
         <div className="p-4 bg-gray-100 rounded-lg text-center">
-          <p className="font-medium text-gray-700">
-            이 상품은 판매가 완료되었습니다.
-          </p>
+          <p className="font-medium text-gray-700">이 상품은 판매가 완료되었습니다.</p>
         </div>
       );
     }
 
     // 판매자인 경우
     if (isSeller) {
-      if (product.status === "RESERVED") {
+      if (product.status === 'RESERVED') {
         return (
           <button
             onClick={handleComplete}
             disabled={isCompleting}
             className="w-full py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none disabled:bg-indigo-300"
           >
-            {isCompleting ? "처리 중..." : "거래 완료"}
+            {isCompleting ? '처리 중...' : '거래 완료'}
           </button>
         );
       }
@@ -173,12 +171,10 @@ const ProductDetail = ({ product, isLoading, error }) => {
     }
 
     // 예약 중이고 구매자인 경우
-    if (product.status === "RESERVED" && isBuyer) {
+    if (product.status === 'RESERVED' && isBuyer) {
       return (
         <div className="space-y-2">
-          <p className="text-sm text-center text-gray-700">
-            이 상품은 내가 예약 중입니다.
-          </p>
+          <p className="text-sm text-center text-gray-700">이 상품은 내가 예약 중입니다.</p>
           <button
             onClick={handleChat}
             className="w-full py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 focus:outline-none"
@@ -190,7 +186,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
     }
 
     // 일반 사용자일 경우 (판매중일 때)
-    if (product.status === "WAITING") {
+    if (product.status === 'WAITING') {
       return (
         <div className="space-y-2">
           <button
@@ -198,7 +194,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
             disabled={isReserving}
             className="w-full py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none disabled:bg-green-300"
           >
-            {isReserving ? "처리 중..." : "예약하기"}
+            {isReserving ? '처리 중...' : '예약하기'}
           </button>
           <button
             onClick={handleChat}
@@ -211,12 +207,10 @@ const ProductDetail = ({ product, isLoading, error }) => {
     }
 
     // 예약 중이고 구매자가 아닌 경우
-    if (product.status === "RESERVED") {
+    if (product.status === 'RESERVED') {
       return (
         <div className="p-4 bg-yellow-50 rounded-lg text-center">
-          <p className="font-medium text-yellow-700">
-            이 상품은 현재 예약 중입니다.
-          </p>
+          <p className="font-medium text-yellow-700">이 상품은 현재 예약 중입니다.</p>
         </div>
       );
     }
@@ -235,9 +229,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
    * 이전 이미지로 이동하는 함수
    */
   const handlePrevImage = () => {
-    setCurrentImage(
-      (prev) => (prev - 1 + product.imageUrls.length) % product.imageUrls.length
-    );
+    setCurrentImage((prev) => (prev - 1 + product.imageUrls.length) % product.imageUrls.length);
   };
 
   return (
@@ -253,7 +245,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
                 alt={product.title}
                 className="w-full h-96 object-contain border rounded-lg"
                 onError={(e) => {
-                  e.target.src = "/images/default-product.png";
+                  e.target.src = '/images/default-product.png';
                 }}
               />
 
@@ -283,7 +275,7 @@ const ProductDetail = ({ product, isLoading, error }) => {
                       key={index}
                       onClick={() => setCurrentImage(index)}
                       className={`w-3 h-3 mx-1 rounded-full ${
-                        index === currentImage ? "bg-indigo-600" : "bg-gray-300"
+                        index === currentImage ? 'bg-indigo-600' : 'bg-gray-300'
                       }`}
                     />
                   ))}
@@ -303,24 +295,22 @@ const ProductDetail = ({ product, isLoading, error }) => {
           <div className="mb-4">
             <div className="flex justify-between items-center">
               {/* 상품 제목 */}
-              <h1 className="text-2xl font-bold text-gray-900">
-                {product.title}
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900">{product.title}</h1>
               {/* 상품 상태 배지 */}
               <span
                 className={`px-3 py-1 text-sm font-bold text-white rounded-full ${
-                  product.status === "WAITING"
-                    ? "bg-green-500"
-                    : product.status === "RESERVED"
-                    ? "bg-yellow-500"
-                    : "bg-gray-500"
+                  product.status === 'WAITING'
+                    ? 'bg-green-500'
+                    : product.status === 'RESERVED'
+                    ? 'bg-yellow-500'
+                    : 'bg-gray-500'
                 }`}
               >
-                {product.status === "WAITING"
-                  ? "판매중"
-                  : product.status === "RESERVED"
-                  ? "예약중"
-                  : "판매완료"}
+                {product.status === 'WAITING'
+                  ? '판매중'
+                  : product.status === 'RESERVED'
+                  ? '예약중'
+                  : '판매완료'}
               </span>
             </div>
             {/* 상품 가격 */}
@@ -347,12 +337,8 @@ const ProductDetail = ({ product, isLoading, error }) => {
 
           {/* 상품 설명 */}
           <div className="mb-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-2">
-              상품 설명
-            </h2>
-            <p className="text-gray-700 whitespace-pre-line">
-              {product.description}
-            </p>
+            <h2 className="text-lg font-medium text-gray-900 mb-2">상품 설명</h2>
+            <p className="text-gray-700 whitespace-pre-line">{product.description}</p>
           </div>
 
           {/* 액션 버튼 영역 */}
