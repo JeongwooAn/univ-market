@@ -5,6 +5,7 @@ import com.univ.market.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class CategoryDataLoader implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         if (categoryRepository.count() == 0) {
             categoryRepository.saveAll(List.of(
